@@ -65,6 +65,9 @@ class _AllTodoTabState extends State<AllTodoTab>
               onChanged: (value) {
                 _allTodoTabViewModel.updateStatus(todo: item);
               },
+              onDeleted: () {
+                _allTodoTabViewModel.removeTodo(todo: item);
+              },
             );
           },
           itemCount: items.length,
@@ -78,17 +81,17 @@ class _AllTodoTabState extends State<AllTodoTab>
   bool get wantKeepAlive => true;
 
   @override
-  void updateFromHomeScreen({Todo todo}) {
+  void onUpdateFromHomeScreen({Todo todo}) {
     _allTodoTabViewModel.reloadTodoListWithUpdatedItem(todo: todo);
   }
 
   @override
-  void addNewTodoFromHomeScreen({Todo todo}) {
+  void onAddingNewTodoFromHomeScreen({Todo todo}) {
     _allTodoTabViewModel.addTodo(todo: todo);
   }
 
   @override
-  void removeTodo({Todo todo}) {
+  void onRemovingTodo({Todo todo}) {
     _allTodoTabViewModel.removeTodo(todo: todo);
   }
 }
