@@ -48,9 +48,11 @@ class TodoTabController {
   }
 
   void removeItem({Todo todo}) {
+    final index = items.indexWhere((element) => element.id == todo.id);
+    if (index.isNegative) return;
     view.removingItem();
     items.removeWhere((element) => element.id == todo.id);
-    view.loadedData(items: items);
+    view.removedItem(items: items, todo: todo);
   }
 
   void updateList({Todo todo}) {

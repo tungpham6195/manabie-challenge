@@ -25,3 +25,10 @@ class TodoTabActionChangedStatus {
 class TodoTabActionAddingItem {}
 
 class TodoTabActionRemovingItem {}
+
+class TodoTabActionRemovedItem {
+  final Todo todo;
+  final List<Todo> items;
+
+  TodoTabActionRemovedItem({this.todo, this.items});
+}

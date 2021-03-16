@@ -13,5 +13,7 @@ abstract class TodoTabViewInteraction {
 
   void removingItem();
 
+  void removedItem({Todo todo, List<Todo> items});
+
   TodoTabViewInteraction._();
 }

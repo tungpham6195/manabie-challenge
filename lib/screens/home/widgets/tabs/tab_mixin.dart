@@ -17,15 +17,15 @@ mixin TabMixin<T extends StatefulWidget> on State<T> {
     super.initState();
     _homeScreenSub = _homeScreenStore.onChange.listen((state) {
       if (state is HomeScreenStateUpdateItem) {
-        return updateFromHomeScreen(todo: state.todo);
+        return onUpdateFromHomeScreen(todo: state.todo);
       }
 
       if (state is HomeScreenStateAddedNewItem) {
-        return addNewTodoFromHomeScreen(todo: state.todo);
+        return onAddingNewTodoFromHomeScreen(todo: state.todo);
       }
 
       if (state is HomeScreenStateRemovedItem) {
-        return removeTodo(todo: state.todo);
+        return onRemovingTodo(todo: state.todo);
       }
     });
   }
@@ -36,13 +36,17 @@ mixin TabMixin<T extends StatefulWidget> on State<T> {
     super.dispose();
   }
 
-  void updateFromHomeScreen({Todo todo});
+  void onUpdateFromHomeScreen({Todo todo});
 
   void reloadHomeScreen({Todo todo}) {
     _homeScreenStore.dispatch(HomeScreenActionUpdateItem(todo: todo));
   }
 
-  void addNewTodoFromHomeScreen({Todo todo});
+  void onAddingNewTodoFromHomeScreen({Todo todo});
 
-  void removeTodo({Todo todo});
+  void onRemovingTodo({Todo todo});
+
+  void dispatchRemovingItem({Todo todo}) {
+    _homeScreenStore.dispatch(HomeScreenActionRemoveTodo(todo: todo));
+  }
 }

@@ -63,4 +63,9 @@ class TodoTabViewModelImpl extends TodoTabViewModel
   void updateList({Todo todo}) {
     _controller.updateList(todo: todo);
   }
+
+  @override
+  void removedItem({Todo todo, List<Todo> items}) {
+    toDoTabStore.dispatch(TodoTabActionRemovedItem(todo: todo, items: items));
+  }
 }

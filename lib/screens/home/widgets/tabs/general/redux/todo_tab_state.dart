@@ -37,6 +37,16 @@ class TodoTabStateChangedStatus extends TodoTabState {
         );
 }
 
+class TodoTabStateRemovedItem extends TodoTabState {
+  final Todo todo;
+
+  TodoTabStateRemovedItem({this.todo, List<Todo> items})
+      : super._(
+          loading: false,
+          items: items,
+        );
+}
+
 final Reducer<TodoTabState> todoTabReducer = combineReducers<TodoTabState>([
   TypedReducer<TodoTabState, TodoTabActionLoadData>((state, action) {
     return TodoTabState.loading(items: state.items);
@@ -55,5 +65,8 @@ final Reducer<TodoTabState> todoTabReducer = combineReducers<TodoTabState>([
   }),
   TypedReducer<TodoTabState, TodoTabActionRemovingItem>((state, action) {
     return TodoTabState.removingTodo(items: state.items);
+  }),
+  TypedReducer<TodoTabState, TodoTabActionRemovedItem>((state, action) {
+    return TodoTabStateRemovedItem(items: action.items, todo: action.todo);
   }),
 ]);
